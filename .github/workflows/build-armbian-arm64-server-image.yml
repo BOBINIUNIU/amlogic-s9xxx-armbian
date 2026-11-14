@@ -1,9 +1,9 @@
 #==========================================================================
-# Description: Build Armbian arm64 server image
+# Description: Build Armbian arm64 minimal image
 # Copyright (C) 2021 https://github.com/ophub/amlogic-s9xxx-armbian
 #==========================================================================
 
-name: Build Armbian arm64 server image
+name: Build Armbian arm64 minimal image
 
 on:
   repository_dispatch:
@@ -324,10 +324,10 @@ on:
       armbian_edition:
         description: "Select image edition type."
         required: false
-        default: "server"
+        default: "minimal"
         type: choice
         options:
-          - server
+          - minimal
           - desktop
           - beta
       builder_name:
@@ -450,7 +450,7 @@ jobs:
 
           # Compile options reference: https://docs.armbian.com/Developer-Guide_Build-Options
           cd build/
-              ./compile.sh RELEASE=${{ matrix.release }} BOARD=${config_board} BRANCH=current BUILD_MINIMAL=no \
+              ./compile.sh RELEASE=${{ matrix.release }} BOARD=${config_board} BRANCH=current BUILD_MINIMAL=yes \
                            BUILD_ONLY=default HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no \
                            COMPRESS_OUTPUTIMAGE="sha" SHARE_LOG=yes
 
